@@ -7,8 +7,8 @@ import os
 pd.options.mode.chained_assignment = None  
 
 #set variables
-infile = 'C:/Users/ngeraci/Documents/core/ContentDMCleanup/wrca_millennium_urls.csv'
-outfile = 'C:/Users/ngeraci/Documents/core/ContentDMCleanup/wrca_millennium_urls_status.csv'
+infile = #'path to CSV input file'
+outfile = #'path to CSV output file'
 
 # Create a new dataframe from a csv file
 df = pd.read_csv(infile)
