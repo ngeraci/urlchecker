@@ -3,43 +3,46 @@ import csv
 import pandas as pd
 import os
 
-# default='warn' to get rid of SettingWithCopyWarning
-pd.options.mode.chained_assignment = None  
+def main(): 
 
-#set variables
-infile = #'path to CSV input file'
-outfile = #'path to CSV output file'
+	# default='warn' to get rid of SettingWithCopyWarning
+	pd.options.mode.chained_assignment = None  
 
-# Create a new dataframe from a csv file
-df = pd.read_csv(infile)
+	#set file path variables
+	infile = #'path to CSV input file'
+	outfile = #'path to CSV output file'
 
-#URLs from dataframe to list
-urls = df['URL'].tolist()
+	# Create a new dataframe from a csv file
+	df = pd.read_csv(infile)
 
-#create empty list
-urlStatus = []
+	#URLs from dataframe to list
+	urls = df['URL'].tolist()
 
-print ("checking urls......")
+	#create empty list
+	urlStatus = []
 
-#loop to get url status
-for i in urls:
-	code = urllib.urlopen(i).getcode()
-	urlStatus.append(code)
+	#loop to get url status
+	for i in urls:
+		code = urllib.urlopen(i).getcode()
+		urlStatus.append(code)
 
-#list to series
-se = pd.Series(urlStatus)
+	#write list to series
+	se = pd.Series(urlStatus)
 
-#series to column
-df['URL Status'] = se.values
+	#write series to column
+	df['URL Status'] = se.values
 
-#remove output file if exists
-try:
-	os.remove(outfile)
-except OSError:
-	pass
+	#delete the output file if it already exists
+	try:
+		os.remove(outfile)
+	except OSError:
+		pass
 
-#save
-df.to_csv(outfile, index=False)
+	#save
+	df.to_csv(outfile, index=False)
 
-# done
-print("done")
+	# done
+	print("done")
+
+if __name__ == '__main__':
+    main()
